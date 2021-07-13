@@ -21,7 +21,7 @@ This Application has been made during the "Imersão React 3a edição" event, wi
 
 # 👩‍💻 Technologies
 
-This project was developed using ReactJS and NextJS, using libs like Styled-components. I have used Typescript for this project too.
+This project was developed using ReactJS and NextJS, using libs like Styled-components. I also have used Typescript for this project.
 
 <div align="center">
 	
