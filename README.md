@@ -1,5 +1,5 @@
 <h1 align="center">
-	<img src='https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/orkut-512.png' width='30'> Alurakut - A Social Media and Orkut based <br>
+	<img src='https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/orkut-512.png' width='30'> Alurakut - A Orkut based Social Media  <br>
 	<img  alt="Dev Name"  src="https://img.shields.io/badge/Developer-Vinicius%20Buchara-blueviolet">
 	<img  alt="GitHub last commit"  src="https://img.shields.io/github/last-commit/vbuchara/alurakut?color=blueviolet&label=Last%20Commit">
 	<img  alt="GitHub repo size"  src="https://img.shields.io/github/repo-size/vbuchara/alurakut?color=blueviolet&label=Repository%20Size">
