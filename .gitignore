@@ -34,4 +34,4 @@ yarn-error.log*
 .vercel
 
 #development
-.vscode
+/.vscode
