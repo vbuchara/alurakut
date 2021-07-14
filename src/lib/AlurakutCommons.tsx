@@ -1,6 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import NextLink from 'next/link';
+import styled, { css } from 'styled-components';
 
 const BASE_URL = 'http://alurakut.vercel.app/';
 const v = '1';
@@ -11,7 +13,14 @@ type AlurakutMenuProps = {
 
 type AlurakutMenuWrapperProps = {
   isMenuOpen?: boolean 
-}
+};
+
+type OrkutNostalgicIconSetProps = {
+  slug?: number,
+  trust?: number,
+  cool?: number,
+  sexy?: number
+};
 
 function Link({ href, children, ...props }) {
   return (
@@ -45,8 +54,8 @@ export function AlurakutMenu({ githubUser }: AlurakutMenuProps) {
           <a href={`/logout`}>
             Sair
           </a>
-          <div>
-            <input placeholder="Pesquisar no Orkut" />
+          <div className="search-area">
+            <FontAwesomeIcon icon={faSearch}/><input placeholder="Pesquisar no Orkut" />
           </div>
         </nav>
 
@@ -151,21 +160,29 @@ AlurakutMenu.Wrapper = styled.header<AlurakutMenuWrapperProps>`
         }
       }
     }
-    input {
-      color: #ffffff;
-      background: #5579A1;
-      padding: 10px 42px;
-      border: 0;
-      background-image: url(${`${BASE_URL}/icons/search.svg`});
-      background-position: 15px center;
-      background-repeat: no-repeat;
+
+    .search-area{
+      color: #000;
+      background: #fff;
+      padding: 10px 30px 10px 15px;
       border-radius: 1000px;
-      font-size: 12px;
-      ::placeholder {
-        color: #ffffff;
-        opacity: 1;
+      display: flex;
+      gap: 10px;
+
+      svg{
+        cursor: pointer;
       }
-    } 
+
+      input {
+        font-size: 12px;
+        border: 0;
+        box-shadow: none;
+        
+        ::placeholder {
+          opacity: 1;
+        }
+      } 
+    }
   }
 `;
 AlurakutMenu.Logo = styled.img`
@@ -175,7 +192,7 @@ AlurakutMenu.Logo = styled.img`
   height: 34px;
 `;
 
-function AlurakutMenuProfileSidebar({ githubUser }) {
+function AlurakutMenuProfileSidebar({ githubUser }: AlurakutMenuProps) {
   return (
     <div className="alurakutMenuProfileSidebar">
       <div>
@@ -252,7 +269,12 @@ AlurakutProfileSidebarMenuDefault.Wrapper = styled.div`
 // ================================================================================================================
 // OrkutNostalgicIconSet
 // ================================================================================================================
-export function OrkutNostalgicIconSet(props) {
+export function OrkutNostalgicIconSet({ 
+    trust = 0, 
+    cool = 0, 
+    sexy = 0, 
+    ...props 
+  }: OrkutNostalgicIconSetProps) {
   return (
     <OrkutNostalgicIconSet.List>
       {[
@@ -268,16 +290,15 @@ export function OrkutNostalgicIconSet(props) {
           </span>
           <span className="OrkutNostalgicIconSet__number" style={{ gridArea: 'number' }}>
             <img key={`orkut__icon_set__${slug}_img`} className="OrkutNostalgicIconSet__iconSample" src={`https://alurakut.vercel.app/icons/${icon}.svg`} />
-            {props[slug] ? props[slug] : 0}
+            {props.slug ? props.slug : 0}
           </span>
         </li>
       ))}
       {[
-        { name: 'Confiável', slug: 'confiavel', icon: 'smile' },
-        { name: 'Legal', slug: 'legal', icon: 'cool' },
-        { name: 'Sexy', slug: 'sexy', icon: 'heart' },
-      ].map(({ name, slug, icon }) => {
-        const total = props[slug] ? props[slug] : 2;
+        { name: 'Confiável', slug: 'confiavel', icon: 'smile', value: trust },
+        { name: 'Legal', slug: 'legal', icon: 'cool', value: cool },
+        { name: 'Sexy', slug: 'sexy', icon: 'heart', value: sexy },
+      ].map(({ name, slug, icon, value }) => {
         return (
           <li key={`orkut__icon_set__${slug}`}>
             <span className="OrkutNostalgicIconSet__title">
@@ -285,7 +306,7 @@ export function OrkutNostalgicIconSet(props) {
             </span>
             <span className="OrkutNostalgicIconSet__iconComplex OrkutNostalgicIconSet__number" style={{ gridArea: 'number' }}>
               {[0, 1, 2].map((_, index) => {
-                const isHeartActive = index <= (total - 1);
+                const isHeartActive = index <= (value - 1);
                 return <img key={`orkut__icon_set__${slug}_img_${index}`} src={`https://alurakut.vercel.app/icons/${icon}.svg`} style={{ marginRight: '2px', opacity: isHeartActive ? 1 : '0.5' }} />
               })}
             </span>
