@@ -1,28 +1,47 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { v4 } from 'uuid';
 
+import { ProfileSidebar } from '../src/components/ProfileSidebar';
 import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
 import { Box, MainGrid, ProfileRelationsBoxWrapper } from '../src/styles/home';
 
-type ProfileSidebarProps = {
-  user: string;
+type CommunityProps = {
+  id: string,
+  name?: string,
+  urlImage?: string
 };
-
-function ProfileSidebar({ user }: ProfileSidebarProps){
-  return (
-    <Box>
-      <img src={`https://github.com/${user}.png`}/>
-    </Box>
-  );
-}
 
 export default function Home() {
   const githubUser = 'vbuchara';
   const userList = ['enzo789416', 'omariosouto'];
+  const [ name, setName ] = useState('');
+  const [ urlImage, setUrlImage ] = useState('');
+  const [ communities, setCommunities ] = useState<CommunityProps[]>([]);
+
+  async function handleCreateCommunity(event: React.FormEvent){
+    event.preventDefault();
+
+    if(name.trim() === '' || urlImage == ''){
+      return;
+    }
+
+    const newCommunity = {
+      id: v4(),
+      name: name,
+      urlImage: urlImage
+    };
+
+    setCommunities([...communities, newCommunity]);
+    console.log(communities);
+
+    setName('');
+    setUrlImage('');
+  }
 
   return (
     <>
-      <AlurakutMenu />
+      <AlurakutMenu githubUser={githubUser}/>
       <MainGrid>
         <div className="profile-area" style={{ gridArea: 'profileArea' }}>
           <ProfileSidebar user={githubUser}/>
@@ -33,7 +52,37 @@ export default function Home() {
               Bem Vindo(a)
             </h1>
 
-            <OrkutNostalgicIconSet />
+            <OrkutNostalgicIconSet slug={2} trust={2} cool={3} sexy={1} />
+          </Box>
+
+          <Box>
+            <h2 className="subTitle">O que você deseja fazer?</h2>
+            <form onSubmit={handleCreateCommunity}>
+              <div>
+                <input 
+                  placeholder="Qual vai ser o nome da sua comunidade?" 
+                  name="title" 
+                  aria-label="Qual vai ser o nome da sua comunidade?"
+                  type="text"
+                  onChange={event => setName(event.target.value)}
+                  value={name}
+                />
+              </div>
+              <div>
+                <input 
+                  placeholder="Coloque a URL de uma imagem para a capa" 
+                  name="image" 
+                  aria-label="Coloque a URL de uma imagem para a capa"
+                  type="text"
+                  onChange={event => setUrlImage(event.target.value)}
+                  value={urlImage}
+                />
+              </div>
+
+              <button>
+                Criar comunidade
+              </button>
+            </form>
           </Box>
         </div>
         <div className="relations-area" style={{ gridArea: 'relationsArea' }}>
@@ -47,7 +96,7 @@ export default function Home() {
                 return (
                   <li key={item}>
                     <a href={`/users/${item}`}>
-                      <img src={`https://github.com/${item}.png`} />
+                      <img src={`https://github.com/${item}.png`} alt="Failed to load" />
                       <span>{item}</span>
                     </a>
                   </li>
@@ -56,11 +105,24 @@ export default function Home() {
             </ul>
 
           </ProfileRelationsBoxWrapper>
-          <Box>
+          <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
-              Comunidades
+              Comunidades ({communities.length})
             </h2>
-          </Box>
+
+            <ul>
+              {communities.map(({ id, name, urlImage }) => {
+                return (
+                  <li key={id}>
+                    <a href={`/users/${name}`}>
+                      <img src={urlImage} />
+                      <span>{name}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </ProfileRelationsBoxWrapper>
         </div>
       </MainGrid>
     </>
