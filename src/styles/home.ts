@@ -6,7 +6,7 @@ import styled from 'styled-components';
 // `
 
 export const Box = styled.div`
-  background-color: #FFF;
+  background-color: ${props => props.theme.colors.primary};
   border-radius: 8px; 
 
   padding: 16px;
@@ -24,19 +24,21 @@ export const Box = styled.div`
     font-size: 32px;
     font-weight: 400;
     margin-bottom: 20px;
+    color: ${props => props.theme.colors.secondaryText};
   }
 
   .subTitle {
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 20px;
+    color: ${props => props.theme.colors.secondaryText};
   }
 
   .smallTitle {
     margin-bottom: 20px;
     font-size: 16px;
     font-weight: 700;
-    color: #333333;
+    color: ${props => props.theme.colors.secondaryText};
     margin-bottom: 20px;
   }
 
@@ -49,29 +51,77 @@ export const Box = styled.div`
 
   input {
     width: 100%;
-    background-color: #F4F4F4;
-    color: #333333;
+    background-color: ${props => props.theme.colors.inputBackground};
+    font-size: 14px;
+    color: ${props => props.theme.colors.secondaryText};
     border: 0;
     padding: 14px 16px;
     margin-bottom: 14px;
     border-radius: 10000px;
     ::placeholder {
-      color: #333333;
+      color: ${props => props.theme.colors.secondaryText};
       opacity: 1;
+    }
+  }
+
+  textarea{
+    width: 100%;
+    background-color: ${props => props.theme.colors.inputBackground};
+    font-size: 14px;
+    color: ${props => props.theme.colors.secondaryText};
+    border: 0;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    outline: 0px;
+    resize: none;
+
+    ::placeholder {
+      color: ${props => props.theme.colors.secondaryText};
+      opacity: 1;
+    }
+
+    &:focus, &:hover{
+      box-shadow: 0px 0px 5px #33333357;
     }
   }
 
   button {
     border: 0;
     padding: 8px 12px;
-    color: #FFFFFF;
+    color: ${props => props.theme.colors.textButton};
     border-radius: 10000px;
-    background-color: #6F92BB;
+    background-color: ${props => props.theme.colors.background};
+    font-size: 14px;
+
+    &.isActive, &.submit {
+      color: ${props => props.theme.colors.primary};
+      background-color: ${props => props.theme.colors.button};
+    }
   }
 
   img {
     border-radius: 8px;
   }
+
+  .themeToggle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      font-size: 12px;
+      color: #2E7BB4;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+`;
+
+export const FormOptionsButtons = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  gap: 16px;
 `;
 
 export const ProfileRelationsBoxWrapper = styled(Box)`
