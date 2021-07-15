@@ -39,7 +39,8 @@ This project was developed using ReactJS and NextJS, using libs like Styled-comp
 This application has the standard scripts of a Create Next App. You can fork or clone it, and run with:
 
 ### `yarn dev`
-
+or
+### `yarn start`
 ---
 
 <h3 align="center">
