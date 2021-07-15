@@ -8,14 +8,14 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font: 400 16px 'Rubik', sans-serif;
   }
 
   body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #D9E6F6;
-    font: 400 16px 'Rubik', sans-serif;
+    background-color: ${props => props.theme.colors.background};
   }
 
   #_next {
