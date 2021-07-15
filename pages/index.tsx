@@ -1,25 +1,44 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 
+import { ProfileRelationsBox, ProfileRelationProps } from '../src/components/ProfileRelationsBox';
 import { ProfileSidebar } from '../src/components/ProfileSidebar';
 import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
-import { Box, MainGrid, ProfileRelationsBoxWrapper } from '../src/styles/home';
-
-type CommunityProps = {
-  id: string,
-  name?: string,
-  urlImage?: string
-};
+import { Box, MainGrid, FormOptionsButtons } from '../src/styles/home';
 
 export default function Home() {
   const githubUser = 'vbuchara';
-  const userList = ['enzo789416', 'omariosouto'];
+
+  const [ activatedForm, setActivatedForm ] = useState('community');
+
+  //Users and Communities Lists States
+  const [ userList, setUserList ] = useState<ProfileRelationProps[]>([]);
+  const [ communities, setCommunities ] = useState<ProfileRelationProps[]>([]);
+
+  //Form states
   const [ name, setName ] = useState('');
   const [ urlImage, setUrlImage ] = useState('');
-  const [ communities, setCommunities ] = useState<CommunityProps[]>([]);
 
-  async function handleCreateCommunity(event: React.FormEvent){
+  useEffect(() => {
+    (async() => {
+      const githubApiResponse = await fetch('https://api.github.com/users/vbuchara/following');
+      const githubFollowersInfo = await githubApiResponse.json();
+      const formattedArray: ProfileRelationProps[] = [];
+
+      githubFollowersInfo.map(({ id, login, avatar_url }) => {
+        formattedArray.push({
+          id: id,
+          name: login,
+          urlImage: avatar_url
+        });
+      });
+
+      setUserList(formattedArray);
+    })()
+  },[]);
+
+  function handleCreateCommunity(event: React.FormEvent){
     event.preventDefault();
 
     if(name.trim() === '' || urlImage == ''){
@@ -33,7 +52,6 @@ export default function Home() {
     };
 
     setCommunities([...communities, newCommunity]);
-    console.log(communities);
 
     setName('');
     setUrlImage('');
@@ -57,7 +75,30 @@ export default function Home() {
 
           <Box>
             <h2 className="subTitle">O que você deseja fazer?</h2>
-            <form onSubmit={handleCreateCommunity}>
+            <FormOptionsButtons>
+              <button 
+                className={(activatedForm == 'community') ? "isActive" : ""}
+                onClick={() => setActivatedForm('community')}
+              >
+                Criar comunidade
+              </button>
+              <button 
+                className={(activatedForm == 'brief') ? "isActive" : ""}
+                onClick={() => setActivatedForm('brief')}
+              >
+                Escrever depoimento
+              </button>
+              <button 
+                className={(activatedForm == 'scrap') ? "isActive" : ""}
+                onClick={() => setActivatedForm('scrap')}
+              >
+                Deixar um scrap
+              </button>
+            </FormOptionsButtons>
+            <form 
+              onSubmit={handleCreateCommunity} 
+              style={(!(activatedForm == 'community')) ? { display: 'none' } : {}}
+            >
               <div>
                 <input 
                   placeholder="Qual vai ser o nome da sua comunidade?" 
@@ -79,50 +120,29 @@ export default function Home() {
                 />
               </div>
 
-              <button>
-                Criar comunidade
+              <button className="submit">
+                Confirmar Envio
+              </button>
+            </form>
+            <form 
+              style={(!(activatedForm == 'brief')) ? { display: 'none' } : {}}
+            >
+              <div>
+                <textarea
+                  placeholder="Escreva aqui seu depoimento"
+                  aria-label="Escreva aqui seu depoimento"
+                />
+              </div>
+
+              <button className="submit">
+                Confirmar Envio
               </button>
             </form>
           </Box>
         </div>
         <div className="relations-area" style={{ gridArea: 'relationsArea' }}>
-          <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Pessoas da Comunidade ({userList.length})
-            </h2>
-
-            <ul>
-              {userList.map((item) => {
-                return (
-                  <li key={item}>
-                    <a href={`/users/${item}`}>
-                      <img src={`https://github.com/${item}.png`} alt="Failed to load" />
-                      <span>{item}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-
-          </ProfileRelationsBoxWrapper>
-          <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Comunidades ({communities.length})
-            </h2>
-
-            <ul>
-              {communities.map(({ id, name, urlImage }) => {
-                return (
-                  <li key={id}>
-                    <a href={`/users/${name}`}>
-                      <img src={urlImage} />
-                      <span>{name}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </ProfileRelationsBoxWrapper>
+          <ProfileRelationsBox title="Seguidores" list={userList} />
+          <ProfileRelationsBox title="Comunidades" list={communities} />
         </div>
       </MainGrid>
     </>
