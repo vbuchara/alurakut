@@ -11,7 +11,7 @@ declare module 'styled-components' {
       header: string,
       headerSecondary: string,
       button: string,
-      textButton: string,
+      iconsText: string,
       inputBackground: string
     };
   }

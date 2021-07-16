@@ -53,13 +53,13 @@ export const Box = styled.div`
     width: 100%;
     background-color: ${props => props.theme.colors.inputBackground};
     font-size: 14px;
-    color: ${props => props.theme.colors.secondaryText};
+    color: #333333;
     border: 0;
     padding: 14px 16px;
     margin-bottom: 14px;
     border-radius: 10000px;
     ::placeholder {
-      color: ${props => props.theme.colors.secondaryText};
+      color: #333333;
       opacity: 1;
     }
   }
@@ -68,7 +68,7 @@ export const Box = styled.div`
     width: 100%;
     background-color: ${props => props.theme.colors.inputBackground};
     font-size: 14px;
-    color: ${props => props.theme.colors.secondaryText};
+    color: #333333;
     border: 0;
     padding: 14px 16px;
     margin-bottom: 14px;
@@ -76,7 +76,7 @@ export const Box = styled.div`
     resize: none;
 
     ::placeholder {
-      color: ${props => props.theme.colors.secondaryText};
+      color: #333333;
       opacity: 1;
     }
 
@@ -88,7 +88,7 @@ export const Box = styled.div`
   button {
     border: 0;
     padding: 8px 12px;
-    color: ${props => props.theme.colors.textButton};
+    color: ${props => props.theme.colors.button};
     border-radius: 10000px;
     background-color: ${props => props.theme.colors.background};
     font-size: 14px;
@@ -172,6 +172,16 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
       z-indeX: 1;
       background-image: linear-gradient(0deg,#00000073,transparent);
     }
+  }
+  a.redirect{
+    font-size: 14px;
+    font-weight: 700;
+    color: #2E7BB4;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
   }
 `;
 

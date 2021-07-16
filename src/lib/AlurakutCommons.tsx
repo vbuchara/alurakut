@@ -324,7 +324,7 @@ OrkutNostalgicIconSet.List = styled.ul`
   flex-wrap: wrap;
   li {
     font-size: 12px;
-    color: #5A5A5A;
+    color: ${props => props.theme.colors.iconsText};
     display: grid;
     grid-template-areas:
       "title title"

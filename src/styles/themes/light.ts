@@ -8,7 +8,7 @@ export const lightTheme = {
     header: '#5C9ECF',
     headerSecondary: '#5292C1',
     button: '#6F92BB',
-    textButton: '#2E7BB4',
+    iconsText: '#5A5A5A',
     inputBackground: '#F4F4F4', 
   },
 }
