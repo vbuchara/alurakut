@@ -11,6 +11,7 @@
 
 <div  align="center">
   <img  alt="Alurakut image" width="400" src="src/assets/images/alurakutPrint.png">
+  <img  alt="Alurakut image" width="400" src="src/assets/images/alurakutPrintDark.png">
 </div>
 
 # ℹ️ Description
@@ -21,7 +22,7 @@ This Application has been made during the "Imersão React 3a edição" event, wi
 
 # 👩‍💻 Technologies
 
-This project was developed using ReactJS and NextJS, using libs like Styled-components. I also have used Typescript for this project.
+This project was developed using ReactJS and NextJS, using libs like Styled-components, and integrated with DatoCMS for information storage. I also have used Typescript for this project.
 
 <div align="center">
 	
@@ -30,6 +31,7 @@ This project was developed using ReactJS and NextJS, using libs like Styled-comp
 |<img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' width='18'> ReactJS |
 |<img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' width='18'> NextJS |
 |💅styled-components |
+|<img src='https://seeklogo.com/images/D/datocms-logo-1C41129CD8-seeklogo.com.png' width='18'> DatoCMS |
 	
 </div>
 
@@ -38,7 +40,7 @@ This project was developed using ReactJS and NextJS, using libs like Styled-comp
 
 This application has the standard scripts of a Create Next App. You can fork or clone it, and run with:
 
-### `yarn dev`
+### `yarn dev` or `yarn start`
 
 ---
 

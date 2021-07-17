@@ -40,8 +40,10 @@ export function ProfileSidebar({ user }: ProfileSidebarProps){
           width={45}
           handleDiameter={30}
           onColor={colors.button}
-          onHandleColor={shade(0.1, colors.primary)}
+          onHandleColor={shade(0.1, '#FFFFFF')}
           offColor={colors.button}
+          offHandleColor={shade(0.1, '#FFFFFF')}
+          activeBoxShadow={'none'}
         />
       </div>
     </Box>

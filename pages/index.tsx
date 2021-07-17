@@ -1,6 +1,11 @@
-
+import jwt from 'jsonwebtoken';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import React, { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import nookies from 'nookies';
+import React, { useEffect, useState, useContext } from 'react';
+import Loader from 'react-loader-spinner';
+import { ThemeContext } from 'styled-components';
 import { v4 } from 'uuid';
 
 import { ProfileRelationsBox, ProfileRelationProps } from '../src/components/ProfileRelationsBox';
@@ -8,13 +13,18 @@ import { ProfileSidebar } from '../src/components/ProfileSidebar';
 import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
 import { Box, MainGrid, FormOptionsButtons } from '../src/styles/home';
 
-export default function Home() {
-  const githubUser = 'vbuchara';
+type HomeProps = {
+  githubUser: string
+};
+
+export default function Home({ githubUser }: HomeProps) {
+  const router = useRouter();
+  const { colors } = useContext(ThemeContext);
 
   //Loading states
   const [ followingLoading, setFollowingLoading ] = useState(true);
   const [ communityLoading, setCommunityLoading ] = useState(true);
-  const [ createCommunityLoading, setCreateCommunityLoading ] = useState(true);
+  const [ createCommunityLoading, setCreateCommunityLoading ] = useState(false);
   
   //Change Form state
   const [ activatedForm, setActivatedForm ] = useState('community');
@@ -31,7 +41,7 @@ export default function Home() {
   useEffect(() => {
     (async() => {
       //Getting User Followers
-      const githubApiResponse = await fetch('https://api.github.com/users/vbuchara/following');
+      const githubApiResponse = await fetch(`https://api.github.com/users/${githubUser}/following`);
       const githubFollowingInfo = await githubApiResponse.json();
       const formattedUsersArray: ProfileRelationProps[] = [];
 
@@ -76,6 +86,7 @@ export default function Home() {
 
   async function handleCreateCommunity(event: React.FormEvent){
     event.preventDefault();
+    setCreateCommunityLoading(true);
 
     if(name.trim() === '' || urlImage == ''){
       return;
@@ -106,15 +117,21 @@ export default function Home() {
     }
     
     setCommunities([formattedRecord, ...communities]);
+    setCreateCommunityLoading(false);
 
     setName('');
     setUrlImage('');
     setLink('');
   }
 
+  function handleLogout(){
+    nookies.destroy(null, 'USER_TOKEN');
+    router.push('/', { pathname: '/' });
+  }
+
   return (
     <>
-      <AlurakutMenu githubUser={githubUser}/>
+      <AlurakutMenu githubUser={githubUser} handleLogout={handleLogout}/>
       <MainGrid>
         <div className="profile-area" style={{ gridArea: 'profileArea' }}>
           <ProfileSidebar user={githubUser}/>
@@ -184,10 +201,13 @@ export default function Home() {
                   value={link}
                 />
               </div>
-
-              <button className="submit">
-                Confirmar Envio
-              </button>
+              
+              <div className="button-div">
+                <button className="submit" style={(createCommunityLoading) ? { cursor: 'not-allowed' } : {}}>
+                  Confirmar Envio
+                </button>
+                {(createCommunityLoading) && (<Loader type="TailSpin" color={colors.secondaryText} height={30} width={30} />)}
+              </div>
             </form>
             <form 
               style={(!(activatedForm == 'brief')) ? { display: 'none' } : {}}
@@ -199,9 +219,12 @@ export default function Home() {
                 />
               </div>
 
-              <button className="submit">
-                Confirmar Envio
-              </button>
+              <div className="button-div">
+                <button className="submit" style={(createCommunityLoading) ? { cursor: 'not-allowed' } : {}}>
+                  Confirmar Envio
+                </button>
+                {(createCommunityLoading) && (<Loader type="TailSpin" color={colors.secondaryText} height={30} width={30} />)}
+              </div>
             </form>
           </Box>
         </div>
@@ -222,4 +245,33 @@ export default function Home() {
       </MainGrid>
     </>
   );
+}
+
+export async function getServerSideProps<GetServerSideProps>(context) {
+  const token = nookies.get(context).USER_TOKEN;
+  const userInfo = jwt.decode(token);
+
+  const responseAuth = await fetch(`${process.env.SITE_URL}/api/auth`, {
+    headers: {
+      Authorization: token
+    }
+  });
+  const userAuth = await responseAuth.json();
+
+  
+  if(!userInfo || !userAuth.isAuthenticated){
+    nookies.destroy(context, 'USER_TOKEN');
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    }
+  }
+  
+  return {
+    props: {
+      githubUser: userInfo.githubUser,
+    },
+  }
 }
