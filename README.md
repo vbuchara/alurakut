@@ -10,8 +10,8 @@
 </h4>
 
 <div  align="center">
-  <img  alt="Alurakut image" width="400" src="src/assets/images/alurakutPrint.png">
-  <img  alt="Alurakut image" width="400" src="src/assets/images/alurakutPrintDark.png">
+  <img  alt="Alurakut image" width="400" height="230" src="src/assets/images/alurakutPrint.png">
+  <img  alt="Alurakut image" width="400" height="230" src="src/assets/images/alurakutPrintDark.png">
 </div>
 
 # ℹ️ Description
