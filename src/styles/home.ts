@@ -116,6 +116,11 @@ export const Box = styled.div`
       justify-content: flex-start;
     }
   }
+
+  .button-div{
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 export const FormOptionsButtons = styled.div`

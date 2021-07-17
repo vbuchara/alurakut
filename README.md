@@ -1,8 +1,8 @@
 <h1 align="center">
-	<img src='https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/orkut-512.png' width='18'> Alurakut - A Social Media and Orkut based <br>
-	<img  alt="Dev Name"  src="https://img.shields.io/badge/Developer-Vinicius%20Buchara-blueviolet">
-	<img  alt="GitHub last commit"  src="https://img.shields.io/github/last-commit/vbuchara/alurakut?color=blueviolet&label=Last%20Commit">
-	<img  alt="GitHub repo size"  src="https://img.shields.io/github/repo-size/vbuchara/alurakut?color=blueviolet&label=Repository%20Size">
+	<img src='https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/orkut-512.png' width='30'> Alurakut - A Orkut based Social Media  <br>
+	<img  alt="Dev Name"  src="https://img.shields.io/badge/Developer-Vinicius%20Buchara-ff2189">
+	<img  alt="GitHub last commit"  src="https://img.shields.io/github/last-commit/vbuchara/alurakut?color=ff2189&label=Last%20Commit">
+	<img  alt="GitHub repo size"  src="https://img.shields.io/github/repo-size/vbuchara/alurakut?color=ff2189&label=Repository%20Size">
 </h1>
 
 <h4  align="center">
@@ -11,6 +11,7 @@
 
 <div  align="center">
   <img  alt="Alurakut image" width="400" src="src/assets/images/alurakutPrint.png">
+  <img  alt="Alurakut image" width="400" src="src/assets/images/alurakutPrintDark.png">
 </div>
 
 # ℹ️ Description
@@ -21,7 +22,7 @@ This Application has been made during the "Imersão React 3a edição" event, wi
 
 # 👩‍💻 Technologies
 
-This project was developed using ReactJS and NextJS, using libs like Styled-components. I have used Typescript for this project too.
+This project was developed using ReactJS and NextJS, using libs like Styled-components, and integrated with DatoCMS for information storage. I also have used Typescript for this project.
 
 <div align="center">
 	
@@ -30,6 +31,7 @@ This project was developed using ReactJS and NextJS, using libs like Styled-comp
 |<img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' width='18'> ReactJS |
 |<img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' width='18'> NextJS |
 |💅styled-components |
+|<img src='https://seeklogo.com/images/D/datocms-logo-1C41129CD8-seeklogo.com.png' width='18'> DatoCMS |
 	
 </div>
 
@@ -38,7 +40,7 @@ This project was developed using ReactJS and NextJS, using libs like Styled-comp
 
 This application has the standard scripts of a Create Next App. You can fork or clone it, and run with:
 
-### `yarn dev`
+### `yarn dev` or `yarn start`
 
 ---
 

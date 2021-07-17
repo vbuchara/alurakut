@@ -8,7 +8,7 @@ const BASE_URL = 'http://alurakut.vercel.app/';
 const v = '1';
 
 type AlurakutMenuProps = {
-  githubUser?: string
+  githubUser?: string,
 };
 
 type AlurakutMenuWrapperProps = {
@@ -35,7 +35,7 @@ function Link({ href, children, ...props }) {
 // ================================================================================================================
 // Menu
 // ================================================================================================================
-export function AlurakutMenu({ githubUser }: AlurakutMenuProps) {
+export function AlurakutMenu({ githubUser, handleLogout }: AlurakutMenuProps & { handleLogout: () => void }) {
   const [isMenuOpen, setMenuState] = React.useState(false);
   return (
     <AlurakutMenu.Wrapper isMenuOpen={isMenuOpen}>
@@ -51,9 +51,9 @@ export function AlurakutMenu({ githubUser }: AlurakutMenuProps) {
         </nav>
 
         <nav>
-          <a href={`/logout`}>
+          <button className="logout" onClick={handleLogout}>
             Sair
-          </a>
+          </button>
           <div className="search-area">
             <FontAwesomeIcon icon={faSearch}/><input placeholder="Pesquisar no Orkut" />
           </div>
@@ -125,7 +125,7 @@ AlurakutMenu.Wrapper = styled.header<AlurakutMenuWrapperProps>`
       justify-content: flex-start;
     }
 
-    button {
+    button:not(.logout) {
       border: 0;
       background: transparent;
       align-self: center;
@@ -135,12 +135,19 @@ AlurakutMenu.Wrapper = styled.header<AlurakutMenuWrapperProps>`
       }
     }
 
+    button.logout {
+      border: 0;
+      background: transparent;
+      align-self: center;
+      display: inline-block;
+    }
+
     nav {
       display: none;
       @media(min-width: 860px) {
         display: flex;
       }
-      a {
+      a, button.logout{
         font-size: 12px;
         color: white;
         padding: 10px 16px;
