@@ -1,12 +1,12 @@
 <h1 align="center">
-	<img src='https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/orkut-512.png' width='30'> Alurakut - A Orkut based Social Media  <br>
+	<img src='https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/orkut-512.png' width='30'> Gitkut - A Orkut based Social Media  <br>
 	<img  alt="Dev Name"  src="https://img.shields.io/badge/Developer-Vinicius%20Buchara-ff2189">
 	<img  alt="GitHub last commit"  src="https://img.shields.io/github/last-commit/vbuchara/alurakut?color=ff2189&label=Last%20Commit">
 	<img  alt="GitHub repo size"  src="https://img.shields.io/github/repo-size/vbuchara/alurakut?color=ff2189&label=Repository%20Size">
 </h1>
 
 <h4  align="center">
-	"Alurakut" is a social media totally based upon the former Orkut, developed using ReactJS and NextJS in the "Imersão React", a React learning event promoted by Alura.
+	"Gitkut" is a social media totally based upon the former Orkut, developed using ReactJS and NextJS in the "Imersão React", a React learning event promoted by Alura.
 </h4>
 
 <div  align="center">
@@ -16,9 +16,19 @@
 
 # ℹ️ Description
 
-Alurakut is just like the old Orkut would be, it's a platform to share photos, videos and other contents to other people. Whether they are friends or participating in the same community, you can share all sort of contents and interact with all types of people and communities in this nostalgic social media 🌐  
+Gitkut is just like the old Orkut would be, it's a platform to share photos, videos and other contents to other people. Whether they are friends or participating in the same community, you can share all sort of contents and interact with all types of people and communities in this nostalgic social media 🌐  
 
-This Application has been made during the "Imersão React 3a edição" event, with the help of Alura.  
+This Application has been made during the "Imersão React 3a edição" event, with the help of Alura. The original aplication name was "Alurakut", I took my own personal changes and style through the development of Alurakut and have made the new application Gitkut ❗ 
+
+# 📝Features and Changes (WIP)
+
+- [x] Dark and Light Themes
+- [ ] OAuth Github Login
+- [ ] Community Page
+- [ ] User Page
+- [ ] Like/Fan System
+- [ ] Trust/Cool/Sexy System
+- [ ] Language Change System
 
 # 👩‍💻 Technologies
 
