@@ -4,6 +4,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import NextLink from 'next/link';
 import styled, { css } from 'styled-components';
 
+import Logo from '../assets/images/logo.svg';
+
 const BASE_URL = 'http://alurakut.vercel.app/';
 const v = '1';
 
@@ -40,7 +42,9 @@ export function AlurakutMenu({ githubUser, handleLogout }: AlurakutMenuProps & {
   return (
     <AlurakutMenu.Wrapper isMenuOpen={isMenuOpen}>
       <div className="container">
-        <AlurakutMenu.Logo src={`${BASE_URL}/logo.svg`} />
+        <AlurakutMenu.Logo>
+          <img src={Logo} alt="Logo.svg"/>
+        </AlurakutMenu.Logo>
 
         <nav style={{ flex: 1 }}>
           {[{ name: 'Inicio', slug: '/'}, {name: 'Amigos', slug: '/amigos'}, {name: 'Comunidades', slug: '/comunidades'}].map((menuItem) => (
@@ -192,11 +196,19 @@ AlurakutMenu.Wrapper = styled.header<AlurakutMenuWrapperProps>`
     }
   }
 `;
-AlurakutMenu.Logo = styled.img`
+AlurakutMenu.Logo = styled.div`
   background-color: #ffffff;
-  padding: 9px 14px;
+  padding: 0px 3px;
   border-radius: 1000px;
   height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img{
+    max-height: 34px;
+    padding: 9px 14px;
+  }
 `;
 
 function AlurakutMenuProfileSidebar({ githubUser }: AlurakutMenuProps) {
@@ -400,7 +412,7 @@ const AlurakutLoginScreen = css`
     }
     .logoArea {
       grid-area: logoArea;
-      background-color: var(--backgroundTertiary);
+      background-color: ${props => props.theme.colors.primary};
       border-radius: var(--commonRadius);
       padding: var(--gutter);
       text-align: center;
@@ -415,17 +427,17 @@ const AlurakutLoginScreen = css`
       }
       p {
         font-size: 12px;
+        font-weight: 700;
         line-height: 1.2;
+        color: ${props => props.theme.colors.secondaryText};
         &:not(:last-child) {
           margin-bottom: 12px;
         }
         strong {
-          color: var(--colorQuarternary);
+          font-size: 12px;
+          font-weight: 700;
+          color: ${props => props.theme.colors.strongText};
         }
-      }
-      img {
-        max-height: 45px;
-        margin-bottom: 36px;
       }
     }
     .formArea {
@@ -433,66 +445,58 @@ const AlurakutLoginScreen = css`
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
-      .box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: var(--gutter);
-        padding-left: 50px;
-        padding-right: 50px;
-        background-color: var(--backgroundSecondary);
+      align-items: center;
+      text-align: center;
+      padding: var(--gutter);
+      padding-top: 100px;
+      padding-left: 50px;
+      padding-right: 50px;
+      background-color: ${props => props.theme.colors.secondaryBackground};
+      border-radius: var(--commonRadius);
+      flex: 1;
+
+      @media(max-width: 860px) {
+        padding-top: 30px;
+      }
+
+      &:first-child {
+        min-height: 224px;
+        @media(min-width: 860px) {
+          min-height: 282px;
+        }
+      }
+      p {
+        font-size: 14px;
+        color: ${props => props.theme.colors.secondaryText};
+      }
+      a {
+        text-decoration: none;
+        color: var(--colorPrimary);
+      }
+      input {
+        width: 100%;
+        display: block;
+        border: 1px solid var(--textQuarternaryColor);
+        padding: 12px;
+        background-color: ${props => props.theme.colors.inputBackground};
         border-radius: var(--commonRadius);
-        flex: 1;
-        &:not(:last-child) {
-          margin-bottom: var(--gap);
-        }
-        &:first-child {
-          min-height: 224px;
-          @media(min-width: 860px) {
-            min-height: 282px;
-          }
-        }
-        p {
-          font-size: 14px;
-        }
-        a {
-          text-decoration: none;
-          color: var(--colorPrimary);
-        }
-        input {
-          width: 100%;
-          display: block;
-          border: 1px solid var(--textQuarternaryColor);
-          padding: 12px;
-          background-color: var(--backgroundTertiary);
-          border-radius: var(--commonRadius);
-          margin-top: 24px;
-          margin-bottom: 16px;
-        }
-        button {
-          width: 100%;
-          display: block;
-          border: 0;
-          padding: 12px;
-          border-radius: var(--commonRadius);
-          background-color: var(--colorPrimary);
-          color: var(--textSecondaryColor);
-        }
+        margin-top: 24px;
+        margin-bottom: 16px;
       }
     }
     .footerArea {
       grid-area: footerArea;
-      background-color: var(--backgroundQuarternary);
       border-radius: var(--commonRadius);
       padding: 8px;
+      background-color: ${props => props.theme.colors.bottomDivColor};
       p {
         font-size: 12px;
         text-align: center;
+        color: #333;
         a {
           text-decoration: none;
           color: var(--colorPrimary);
+          font-size: 12px;
         }
       }
     }

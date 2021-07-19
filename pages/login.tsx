@@ -1,13 +1,15 @@
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
-import { LoginMain } from '../src/styles/login';
+import Logo from '../src/assets/images/logo.svg';
+import GithubIcon from '../src/assets/svgs/github-icon.svg';
+import { LoginMain, LoginButton } from '../src/styles/login';
 
 export default function LoginPage() {
   const router = useRouter();
 
-  const [ user, setUser ] = useState('');
+  // const [ user, setUser ] = useState('');
 
   async function handleLoginForm(event: React.FormEvent){
     event.preventDefault();
@@ -16,7 +18,7 @@ export default function LoginPage() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ githubUser: user })
+      body: JSON.stringify({ githubUser: 'vbuchara' })
     });
     const userLogged = await responseLogin.json();
 
@@ -43,7 +45,9 @@ export default function LoginPage() {
     <LoginMain>
       <div className="loginScreen">
         <section className="logoArea">
-          <img src="https://alurakut.vercel.app/logo.svg" />
+          <div className="logo">
+            <img src={Logo} alt="Logo.svg"/>
+          </div>
 
           <p><strong>Conecte-se</strong> aos seus amigos e familiares usando recados e mensagens instantâneas</p>
           <p><strong>Conheça</strong> novas pessoas através de amigos de seus amigos e comunidades</p>
@@ -51,19 +55,12 @@ export default function LoginPage() {
         </section>
 
         <section className="formArea">
-          <form className="box" onSubmit={handleLoginForm}>
-            <p>
-              Acesse agora mesmo com seu usuário do <strong>GitHub</strong>!
+          <p>
+            Acesse agora mesmo com seu usuário do <strong>GitHub</strong>!
           </p>
-            <input 
-              placeholder="Usuário" 
-              onChange={event => setUser(event.target.value)} 
-              value={user}
-            />
-            <button type="submit">
-                Login
-            </button>
-          </form>
+          <LoginButton type="submit" onClick={handleLoginForm}>
+             <GithubIcon/>Login com o GitHub
+          </LoginButton>
         </section>
 
         <footer className="footerArea">
@@ -75,3 +72,20 @@ export default function LoginPage() {
     </LoginMain>
   )
 } 
+
+export async function getServerSideProps<GetServerSideProps>(context) {
+  const token = nookies.get(context).USER_TOKEN;
+
+  if(token){
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  
+  return {
+    props: { },
+  }
+}
